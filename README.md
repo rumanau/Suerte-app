@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tu número de la suerte</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background-color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .numero {
+      font-size: 20vw; /* Muy grande y adaptable al ancho de pantalla */
+      color: green;
+      font-weight: bold;
+    }
+
+    .frase {
+      font-size: 6vw;  /* Tamaño grande para móvil */
+      margin-top: 40px;
+      color: #333;
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h1 {
+      font-size: 6vw;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎉 Tu número de la suerte es:</h1>
+  <div class="numero" id="numero"></div>
+  <div class="frase" id="frase"></div>
+
+  <script>
+    const frases = [
+      "Hoy todo está a tu favor.",
+      "La suerte visita a los valientes.",
+      "Tu perseverancia será premiada.",
+      "La fortuna está cerca, no te detengas.",
+      "Confía, los astros están contigo.",
+      "Haz tu jugada, el universo conspira a tu favor.",
+      "El 7 no es el único afortunado hoy.",
+      "Una sonrisa atraerá la buena suerte.",
+      "Hoy es un día especial. Aprovéchalo.",
+      "Haz lo inesperado. La suerte te sigue.",
+      "Cada día trae una nueva oportunidad.",
+      "La buena fortuna está en tu camino.",
+      "Confía en tus instintos.",
+      "La perseverancia abrirá puertas.",
+      "Sigue adelante, el éxito te espera.",
+      "La suerte favorece a los audaces.",
+      "Tu energía positiva atrae bendiciones.",
+      "Hoy es un día para ganar.",
+      "El universo conspira a tu favor.",
+      "Mantén la fe y recibirás milagros.",
+      "La suerte es un estado mental.",
+      "Lo mejor está por venir.",
+      "Aprovecha cada oportunidad que se presenta.",
+      "Tus esfuerzos serán recompensados.",
+      "El éxito toca a tu puerta hoy.",
+      "Confía en el proceso.",
+      "Tu actitud determina tu suerte.",
+      "El destino sonríe a los que luchan.",
+      "Sigue tu intuición, no falla.",
+      "Las estrellas están alineadas para ti.",
+      "El día es tuyo para conquistar.",
+      "Sé valiente y la suerte llegará.",
+      "Lo inesperado traerá fortuna.",
+      "Tu energía atraerá lo que deseas.",
+      "La buena suerte es tu aliada.",
+      "Haz que hoy cuente.",
+      "Los sueños se vuelven realidad.",
+      "La suerte premia a los perseverantes.",
+      "Abre tu mente y deja entrar la suerte.",
+      "Cada paso te acerca al éxito.",
+      "Cree en ti y en tu suerte.",
+      "El universo te regala oportunidades.",
+      "Sigue luchando, el premio es tuyo.",
+      "La fortuna sonríe a los que no se rinden.",
+      "Hoy es un buen día para arriesgar.",
+      "Tus ganas de triunfar atraerán suerte.",
+      "Sé optimista, la suerte te busca.",
+      "Los cambios traerán prosperidad.",
+      "El éxito está en tu camino.",
+      "Confía en tu capacidad.",
+      "La suerte se construye con acciones.",
+      "Cada día es una nueva chance.",
+      "Abre tu corazón a la buena fortuna.",
+      "Tu esfuerzo será reconocido.",
+      "La paciencia trae recompensa.",
+      "Lo mejor aún está por llegar.",
+      "Tu suerte está en tus manos.",
+      "Confía en que todo saldrá bien.",
+      "Aprovecha las señales del universo.",
+      "La fortuna llega a los valientes.",
+      "La buena suerte no es casualidad.",
+      "Tú creas tu destino.",
+      "El poder está en tus decisiones.",
+      "Sigue adelante con confianza.",
+      "La suerte premia la constancia.",
+      "Mantén la mente abierta.",
+      "El éxito es para los decididos.",
+      "No temas al cambio, trae suerte.",
+      "Haz que cada momento cuente.",
+      "Tu actitud atraerá lo que mereces.",
+      "El universo recompensa la paciencia.",
+      "La buena suerte es contagiosa.",
+      "Los sueños están más cerca de lo que crees.",
+      "Sé la energía que deseas atraer.",
+      "Cada acción suma para el éxito.",
+      "Sigue tu camino con determinación.",
+      "La suerte se encuentra en la perseverancia.",
+      "El poder de la mente es infinito.",
+      "Cree en lo imposible.",
+      "La fortuna es amiga del optimista.",
+      "Tu esfuerzo abre puertas.",
+      "Haz lo que amas y la suerte llegará.",
+      "El éxito es un hábito.",
+      "Mantén la esperanza viva.",
+      "La suerte está en los pequeños detalles.",
+      "Confía en tus capacidades.",
+      "Cada día es una nueva aventura.",
+      "La fortuna sonríe a los constantes.",
+      "Tu actitud positiva es clave.",
+      "El éxito comienza con un paso.",
+      "Nunca es tarde para cambiar tu suerte.",
+      "La suerte se multiplica con la gratitud.",
+      "Abre tus ojos a las oportunidades.",
+      "La perseverancia vence al talento.",
+      "El universo te apoya en tus metas.",
+      "Cada dificultad es una oportunidad.",
+      "Sigue soñando en grande.",
+      "La suerte premia la valentía.",
+      "Tu confianza es tu mayor poder.",
+      "El éxito llega a los que persisten.",
+      "Cree en ti mismo siempre.",
+      "La buena suerte está en tu interior.",
+      "Toma riesgos calculados.",
+      "Los cambios son puertas a la fortuna.",
+      "La mente positiva atrae la buena suerte.",
+      "El éxito es fruto del esfuerzo.",
+      "Mantente enfocado en tus objetivos.",
+      "Cada día es un regalo.",
+      "La fortuna sonríe a quienes actúan.",
+      "La suerte es la suma del trabajo y la oportunidad.",
+      "No te rindas, sigue adelante.",
+      "Tu energía atrae bendiciones.",
+      "Los sueños son posibles.",
+      "Haz que tu luz brille fuerte.",
+      "El éxito es para los valientes.",
+      "La suerte llega a los que la buscan.",
+      "Confía en tu viaje.",
+      "Cada paso te acerca a la meta.",
+      "La fortuna es una actitud.",
+      "Sigue creciendo y aprendiendo.",
+      "Tu perseverancia cambia destinos.",
+      "La suerte acompaña a la acción.",
+      "El éxito es tu destino natural.",
+      "Mantén la mente abierta a lo bueno.",
+      "La buena fortuna está en tu camino.",
+      "Cada día trae nuevas oportunidades.",
+      "Confía en el tiempo y en ti.",
+      "La suerte llega a quienes creen.",
+      "Sigue adelante sin miedo.",
+      "La fortuna premia el esfuerzo diario.",
+      "Sé positivo y la suerte llegará.",
+      "Los sueños se construyen paso a paso.",
+      "El éxito es el resultado del trabajo constante.",
+      "La suerte es un regalo del universo.",
+      "Mantente fuerte y confiado.",
+      "Cada dificultad trae una lección.",
+      "El poder de la suerte está en ti.",
+      "Confía en tu intuición.",
+      "Haz que tu día sea memorable.",
+      "La buena fortuna está en los detalles.",
+      "Sigue soñando y luchando.",
+      "La suerte está a un paso de ti.",
+      "Tu esfuerzo vale oro.",
+      "La suerte favorece a los decididos.",
+      "Cree en el poder de tus sueños.",
+      "El éxito es para quienes se atreven.",
+      "La fortuna llega con paciencia.",
+      "Mantén la esperanza y la fe.",
+      "Cada día es una nueva oportunidad de suerte.",
+      "Sigue tu corazón y tu suerte aparecerá.",
+      "La suerte está en tus manos.",
+      "El esfuerzo constante trae buenos frutos.",
+      "Confía en el camino que escogiste.",
+      "La buena fortuna es para los valientes.",
+      "La suerte llega cuando menos lo esperas.",
+      "El éxito se construye con cada acción.",
+      "Sigue adelante con pasión.",
+      "La fortuna sonríe a los que no se rinden.",
+      "Tu energía positiva es magnética.",
+      "Haz que hoy sea el mejor día.",
+      "La suerte es parte del viaje.",
+      "Confía y avanza sin miedo.",
+      "Cada paso vale la pena.",
+      "El éxito está cerca, no te detengas.",
+      "La buena suerte te acompaña siempre.",
+      "Mantente fuerte ante los desafíos.",
+      "La fortuna premia la constancia.",
+      "Sigue soñando y alcanzando metas.",
+      "El poder está en tu mente.",
+      "La suerte es para los valientes y positivos.",
+      "Confía en ti y en tus capacidades.",
+      "Cada día trae un nuevo comienzo.",
+      "La fortuna favorece a los que actúan.",
+      "No pierdas la fe en ti mismo.",
+      "Sigue adelante, la suerte está contigo.",
+      "Tu perseverancia será recompensada.",
+      "Haz lo mejor hoy para un mejor mañana.",
+      "La suerte sonríe a los que confían.",
+      "El éxito llega con determinación.",
+      "Mantente positivo y enfocado.",
+      "Cada dificultad es una oportunidad disfrazada.",
+      "La buena fortuna está en tu interior.",
+      "Confía en la magia de la vida.",
+      "Sigue luchando por tus sueños.",
+      "La suerte es una cuestión de actitud.",
+      "Tu esfuerzo abrirá puertas cerradas.",
+      "El éxito es para los que nunca se rinden.",
+      "Mantente fiel a ti mismo.",
+      "La fortuna llega a quienes perseveran.",
+      "Cada día es una página en blanco.",
+      "Sigue avanzando con esperanza.",
+      "La suerte premia a los valientes.",
+      "Confía en tu poder interior.",
+      "Haz que la suerte te encuentre listo.",
+      "El éxito es un camino, no un destino.",
+      "La buena fortuna está al alcance de tu mano.",
+      "Sigue creyendo en ti.",
+      "La suerte es para quienes actúan con fe.",
+      "Cada paso firme es un paso hacia la suerte.",
+      "Confía en el proceso y en ti mismo.",
+      "La fortuna llega cuando menos lo esperas.",
+      "Mantén tu mente abierta a lo positivo.",
+      "Sigue creando tu propio destino.",
+      "La suerte sonríe a quienes trabajan duro.",
+      "El éxito es fruto del esfuerzo diario.",
+      "Confía en tu intuición y sabiduría.",
+      "Cada día trae nuevas oportunidades.",
+      "La buena fortuna es para los valientes.",
+      "Sigue adelante con determinación y fe.",
+      "La suerte es una energía que atraes.",
+      "Tu actitud positiva cambiará tu suerte.",
+      "Haz que cada momento cuente.",
+      "La fortuna premia la paciencia y el esfuerzo.",
+      "Confía en que lo mejor está por venir.",
+      "Sigue luchando, la suerte está contigo.",
+      "El éxito es para los persistentes.",
+      "La buena suerte llega a los valientes y positivos.",
+      "Cada día es un nuevo comienzo.",
+      "Mantente fuerte y confiado en tu camino.",
+      "La fortuna te sonríe hoy y siempre.",
+      "Confía en ti y en el universo.",
+      "Sigue tus sueños con pasión y fe.",
+      "La suerte es para los que nunca se rinden.",
+      "El éxito llega a quienes creen en sí mismos.",
+      "Mantén una mente abierta y positiva.",
+      "La buena fortuna es un regalo para ti.",
+      "Sigue adelante con esperanza y valentía.",
+      "Cada paso que das te acerca a la suerte.",
+      "Confía en el poder de tu mente.",
+      "La fortuna premia el esfuerzo constante.",
+      "Sigue luchando y nunca pierdas la fe.",
+      "La suerte está en tu interior.",
+      "Haz que hoy sea un gran día.",
+      "El éxito es para los valientes y persistentes.",
+      "Confía en tu intuición y en ti mismo.",
+      "Cada día es una oportunidad para brillar.",
+      "La buena fortuna te acompaña en tu camino.",
+      "Sigue adelante con determinación y optimismo.",
+      "La suerte es parte del viaje hacia el éxito.",
+      "Mantente fuerte y positivo siempre.",
+      "Confía en que todo saldrá bien.",
+      "Sigue luchando por lo que deseas.",
+      "La fortuna premia a los que se atreven.",
+      "Haz que tu luz brille intensamente.",
+      "El éxito llega a los que nunca se rinden.",
+      "La buena suerte está contigo siempre.",
+      "Confía en tu poder y en el universo.",
+      "Cada día es una nueva oportunidad de éxito.",
+      "Sigue adelante con fe y valentía.",
+      "La suerte es para quienes actúan con pasión.",
+      "Mantente enfocado y positivo.",
+      "La fortuna premia a los constantes.",
+      "Confía en tu camino y en ti mismo.",
+      "Sigue soñando y alcanzando tus metas."
+    ];
+
+    function generarNumeroAleatorio() {
+      let n = Math.floor(Math.random() * 100);
+      return n.toString().padStart(2, '0');
+    }
+
+    function obtenerFraseAleatoria() {
+      const index = Math.floor(Math.random() * frases.length);
+      return frases.splice(index, 1)[0];
+    }
+
+    document.getElementById('numero').innerText = generarNumeroAleatorio();
+    document.getElementById('frase').innerText = obtenerFraseAleatoria();
+  </script>
+
+</body>
+</html>
