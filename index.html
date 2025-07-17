@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tu número de la suerte</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background-color: #f9f9f9; }
+    .numero { font-size: 80px; color: green; }
+    .frase { font-size: 24px; margin-top: 20px; color: #333; max-width: 600px; margin-left: auto; margin-right: auto; }
+  </style>
+</head>
+<body>
+
+  <h1>🎉 Tu número de la suerte es:</h1>
+  <div class="numero" id="numero"></div>
+  <div class="frase" id="frase"></div>
+
+  <script>
+    const frases = [
+      "Hoy todo está a tu favor.",
+      "La suerte visita a los valientes.",
+      "Tu perseverancia será premiada.",
+      "La fortuna está cerca, no te detengas.",
+      "Confía, los astros están contigo.",
+      "Haz tu jugada, el universo conspira a tu favor.",
+      "El 7 no es el único afortunado hoy.",
+      "Una sonrisa atraerá la buena suerte.",
+      "Hoy es un día especial. Aprovéchalo.",
+      "Haz lo inesperado. La suerte te sigue."
+    ];
+
+    function generarNumeroAleatorio() {
+      let n = Math.floor(Math.random() * 100);
+      return n.toString().padStart(2, '0');
+    }
+
+    function obtenerFraseAleatoria() {
+      const index = Math.floor(Math.random() * frases.length);
+      return frases.splice(index, 1)[0];
+    }
+
+    document.getElementById('numero').innerText = generarNumeroAleatorio();
+    document.getElementById('frase').innerText = obtenerFraseAleatoria();
+  </script>
+
+</body>
+</html>
